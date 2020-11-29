@@ -19,7 +19,6 @@ class TodoItem extends Component {
         let {id } = this.props
         let {task} = this.state;
         this.props.update(id,task)
-        console.log('this is the task'+task);
         this.setState({
             edit:!this.state.edit
         })
