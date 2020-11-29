@@ -7,10 +7,11 @@ class TodoList extends Component {
     constructor(props){
         super(props)
         this.state = {
-            todos:[]
+            todos:[] 
         }
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.haneleDelete = this.haneleDelete.bind(this)
+        this.haneleDelete = this.haneleDelete.bind(this);
+        this.update = this.update.bind(this)
     
     }
 
@@ -26,8 +27,20 @@ class TodoList extends Component {
         this.setState({todos: newTodos});
     }
 
+    handleEditing(){
+        this.setState({isEditing: true})
+    }
+    update(id, updatedTask){
+            let updatedTodo = this.state.todos.map(todo => {
+            if(todo.id === id){
+                return {...todo, todoItem: updatedTask}
+            }
+            return todo;
+        });
+        this.setState({todos:updatedTodo});
+    }
     render(){
-        const todo = this.state.todos.map(todo => (<TodoItem key={todo.id} todo={todo.todoItem} deleItem={()=>this.haneleDelete(todo.id)}/>))
+        const todo = this.state.todos.map(todo => (<TodoItem key={todo.id} id={todo.id} todo={todo.todoItem} deleItem={()=>this.haneleDelete(todo.id)} Editing={()=> this.handleEditing(todo.id)} update={this.update}/>))
         return(
             <div>
                 <h2>Out Todo List</h2>
