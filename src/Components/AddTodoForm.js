@@ -20,9 +20,9 @@ class AddTodoForm extends Component {
     }
     render(){
         return(
-            <form onSubmit={this.submitTodo}>
-                <input type="text" value={this.state.todoItem} placeholder="Add a todo" onChange={this.handleChange}/>
-                <button type="submit"> Add Todo </button>
+            <form style={{marginBottom:'20px', display:'flex', justifyContent:'space-evenly'}} onSubmit={this.submitTodo}>
+                <input style={{ border:'none', width:'340px', height: '30px', paddingLeft:'20px' }}type="text" value={this.state.todoItem} placeholder="Add a todo" onChange={this.handleChange}/>
+                <button style={{border:'none', backgroundColor: 'salmon', color:'#fff' }}type="submit"> Add Todo </button>
             </form>
         )
     }

@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import '../Styles/TodoItem.css'
 
 class TodoItem extends Component {
     state = {
@@ -23,13 +24,17 @@ class TodoItem extends Component {
             edit:!this.state.edit
         })
     }
+    isCompleted = ()=>{
+         this.props.handleComplete()
+    }
     render() {
+        const space = {marginLeft: '15px'}
         let result;
         if(this.state.edit) {
             result = (
-                <div>
+                <div className="TododItem-single">
                     <form onSubmit={this.updateTodo}>
-                        <input type="text" value={this.state.task}  onChange={this.handleChange}/>
+                        <input className="TododItem-single-input" type="text" value={this.state.task}  onChange={this.handleChange}/>
                         <button type="submit"> Update </button>
                     </form>
                 </div>
@@ -37,7 +42,16 @@ class TodoItem extends Component {
         } else{
            result = (
                <div className="TododItem">
-                   <div className="TododItem-single">{this.props.todo} <button onClick={this.isEditing}>edit</button><button onClick={this.props.deleItem}>delete</button></div>
+                   <div className="TododItem-single">
+                       <div className={this.props.complete ? 'completed' : ''}>
+                       {this.props.todo} 
+                       </div>
+                       <div >
+                        <button  onClick={this.isCompleted}>check</button>
+                        <button onClick={this.isEditing}>edit</button>
+                        <button onClick={this.props.deleItem}>delete</button>
+                       </div> 
+                    </div>
                </div>
            )
         }
